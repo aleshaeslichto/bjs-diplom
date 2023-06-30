@@ -49,10 +49,6 @@ moneyManager.addMoneyCallback = (data) => {
             ProfileWidget.showProfile(response.data);
         }
         showNotification(moneyManager, response.success, response.success ? 'Баланс пополнен' : response.error)
-        moneyManager.setMessage(
-            response.success,
-            response.success ? 'Баланс пополнен' : response.error
-        );
     })
 }
 
@@ -62,10 +58,7 @@ moneyManager.conversionMoneyCallback = (data) => {
         if (response.success) {
             ProfileWidget.showProfile(response.data);
         }
-        moneyManager.setMessage(
-            response.success,
-            response.success ? 'Конвертация произведена успешно' : response.error
-        );
+        showNotification(moneyManager, response.success, response.success ? 'Конвертация произведена успешно' : response.error)
     })
 }
 
@@ -76,10 +69,7 @@ moneyManager.sendMoneyCallback = (data) => {
         if (response.success) {
             ProfileWidget.showProfile(response.data);
         }
-        moneyManager.setMessage(
-            response.success,
-            response.success ? 'Перевод произведена успешно' : response.error
-        );
+        showNotification(moneyManager, response.success, response.success ? 'Перевод произведена успешно' : response.error)
     })
 }
 
@@ -104,10 +94,7 @@ ApiConnector.getFavorites((response) => {
 favoritesWidget.addUserCallback = (data) => {
     ApiConnector.addUserToFavorites(data, (response) => {
         updateFavorites(response.success, response.data);
-        favoritesWidget.setMessage(
-            response.success,
-            response.success ? 'Пользователь добавлен в избранное' : response.error
-        );
+        showNotification(favoritesWidget, response.success, response.success ? 'Пользователь добавлен в избранное' : response.error)
     })
 }
 
@@ -115,9 +102,6 @@ favoritesWidget.addUserCallback = (data) => {
 favoritesWidget.removeUserCallback = (data) => {
     ApiConnector.removeUserFromFavorites(data, (response) => {
         updateFavorites(response.success, response.data);
-        favoritesWidget.setMessage(
-            response.success,
-            response.success ? 'Пользователь удален из избранного' : response.error
-        );
+        showNotification(favoritesWidget, response.success,response.success ? 'Пользователь удален из избранного' : response.error)
     })
 }
